@@ -1,0 +1,23 @@
+[
+  {
+    "HallId": 1,
+    "HallName": "General Reading Hall",
+    "Capacity": 60,
+    "Location": "Ground Floor",
+    "IsAvailable": true
+  },
+  {
+    "HallId": 2,
+    "HallName": "Lecture Hall",
+    "Capacity": 120,
+    "Location": "Second Floor",
+    "IsAvailable": false
+  },
+  {
+    "HallId": 3,
+    "HallName": "Archive Room",
+    "Capacity": 30,
+    "Location": "Basement",
+    "IsAvailable": true
+  }
+]

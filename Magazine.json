@@ -1,0 +1,32 @@
+[
+  {
+    "MagazineId": 1,
+    "Title": "Tech Today",
+    "Publisher": "Innovate Media",
+    "Category": "Technology",
+    "IssueNumber": 45,
+    "ReleaseDate": "2025-08-01T00:00:00",
+    "PageCount": 64,
+    "Price": 5.99
+  },
+  {
+    "MagazineId": 2,
+    "Title": "Health & Wellness",
+    "Publisher": "Vital Life Press",
+    "Category": "Health",
+    "IssueNumber": 12,
+    "ReleaseDate": "2025-07-15T00:00:00",
+    "PageCount": 48,
+    "Price": 4.50
+  },
+  {
+    "MagazineId": 3,
+    "Title": "Global Explorer",
+    "Publisher": "WorldView Publications",
+    "Category": "Travel",
+    "IssueNumber": 78,
+    "ReleaseDate": "2025-06-20T00:00:00",
+    "PageCount": 72,
+    "Price": 6.25
+  }
+]

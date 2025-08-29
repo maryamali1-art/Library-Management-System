@@ -1,0 +1,47 @@
+[
+  {
+    "BookId": 2,
+    "BookName": "Introduction to C#",
+    "BookAuther": "Ahmed Khalid",
+    "Year": 2022,
+    "Price": 40,
+    "PublishingHouse": "Tech House",
+    "BookPages": 320
+  },
+  {
+    "BookId": 3,
+    "BookName": "Algorithms and Data Structures",
+    "BookAuther": "Omar Al-Mansoori",
+    "Year": 2021,
+    "Price": 60,
+    "PublishingHouse": "Code Press",
+    "BookPages": 500
+  },
+  {
+    "BookId": 4,
+    "BookName": "w",
+    "BookAuther": "w",
+    "Year": 2,
+    "Price": 2,
+    "PublishingHouse": "w",
+    "BookPages": 2
+  },
+  {
+    "BookId": 1,
+    "BookName": "j",
+    "BookAuther": "u",
+    "Year": 8,
+    "Price": 9,
+    "PublishingHouse": "k",
+    "BookPages": 8
+  },
+  {
+    "BookId": 1,
+    "BookName": "r",
+    "BookAuther": "t",
+    "Year": 6,
+    "Price": 7,
+    "PublishingHouse": "h",
+    "BookPages": 9
+  }
+]

@@ -1,0 +1,32 @@
+[
+  {
+    "BorrowingId": 1,
+    "ReaderId": 101,
+    "ItemId": 2001,
+    "ItemType": "Book",
+    "BorrowDate": "2025-08-15T00:00:00",
+    "DueDate": "2025-09-15T00:00:00",
+    "ReturnDate": null,
+    "IsReturned": false
+  },
+  {
+    "BorrowingId": 2,
+    "ReaderId": 102,
+    "ItemId": 3005,
+    "ItemType": "Magazine",
+    "BorrowDate": "2025-08-10T00:00:00",
+    "DueDate": "2025-08-25T00:00:00",
+    "ReturnDate": "2025-08-24T00:00:00",
+    "IsReturned": true
+  },
+  {
+    "BorrowingId": 3,
+    "ReaderId": 103,
+    "ItemId": 2010,
+    "ItemType": "Book",
+    "BorrowDate": "2025-08-20T00:00:00",
+    "DueDate": "2025-09-20T00:00:00",
+    "ReturnDate": null,
+    "IsReturned": false
+  }
+]
