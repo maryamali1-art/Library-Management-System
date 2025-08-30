@@ -33,10 +33,15 @@ namespace LibraryManagementSystem
         {
             return new Books(bookName, bookAuthor, year, price, publishingHouse, bookPages);
         }
+        public static void UpdateNextId(List<Books> books)
+        {
+            nextId = (books != null && books.Count > 0) ? books.Max(b => b.BookId) + 1 : 1;
+        }
 
         public void ShowDetails()
         {
             Console.WriteLine(" Book Details:");
+            Console.WriteLine($"BookId: {BookId}");
             Console.WriteLine($"Name: {BookName}");
             Console.WriteLine($"Author: {BookAuthor}");
             Console.WriteLine($"Year : {Year}");

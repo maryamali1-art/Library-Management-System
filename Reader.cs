@@ -9,12 +9,12 @@ namespace LibraryManagementSystem
 {
     internal class Reader
     {
-        public int NextId = 1;
+        public static int NextId = 1;
         public int ReaderId { get; set; }
         public string ReaderName { get; set; }
         public string ReaderAddreas { get; set; }
-        public int PhoneNumber { get; set; }
-        public Reader(string readerName, string readerAddreas, int phoneNumber)
+        public string PhoneNumber { get; set; }
+        public Reader(string readerName, string readerAddreas, string phoneNumber)
         {
             ReaderId = NextId++;
             ReaderName = readerName;
@@ -23,7 +23,11 @@ namespace LibraryManagementSystem
 
 
         }
-        public static Reader ReaderCreate(string ReaderName, string ReaderAddreas, int PhoneNumber)
+        public static void UpdateNextIdR(List<Reader> reader)
+        {
+            NextId = (reader != null && reader.Count > 0) ? reader.Max(b => b.ReaderId) + 1 : 1;
+        }
+        public static Reader ReaderCreate(string ReaderName, string ReaderAddreas, string PhoneNumber)
         {
             return new Reader(ReaderName, ReaderAddreas, PhoneNumber);
         }

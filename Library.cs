@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Text.Json;
 using System.Net.NetworkInformation;
+using System.Text.RegularExpressions;
 
 namespace LibraryManagementSystem
 {
@@ -56,8 +57,7 @@ namespace LibraryManagementSystem
         public void Display()
         {
             string path = @"C:\Users\master\Desktop\C#OOP\LibraryManagementSystem\Books.json";
-            books = ReadFromJson<Books>(path); // ← تحديد النوع وتخزين النتيجة
-
+            books = ReadFromJson<Books>(path);
             foreach (var book in books)
             {
                 book.ShowDetails();
@@ -67,6 +67,9 @@ namespace LibraryManagementSystem
         {
             string path = @"C:\Users\master\Desktop\C#OOP\LibraryManagementSystem\Books.json";
             books = ReadFromJson<Books>(path);
+
+            Books.UpdateNextId(books);
+
 
             Console.WriteLine("Enter Book name:");
             string title = Console.ReadLine();
@@ -87,11 +90,10 @@ namespace LibraryManagementSystem
             int bookPages = int.Parse(Console.ReadLine());
 
             Books newBook = Books.Create(title, bookAuthor, year, price, publishingHouse, bookPages);
-
             books.Add(newBook);
             SaveToJson<Books>(books, path);
 
-            Console.WriteLine("✅ Book added successfully.");
+            Console.WriteLine("Book added successfully.");
         }
 
         public static void SaveToJson<T>(List<T> data, string path)
@@ -191,14 +193,14 @@ namespace LibraryManagementSystem
                 Console.WriteLine("No book was found with this ID.");
             }
         }
-        public void BorrowBook()
+        public void Borrow()
         {
-            string path = @"C:\Users\master\Desktop\C#OOP\LibraryManagementSystem\Books.json";
-            books = ReadFromJson<Books>(path);
+            string path = @"C:\Users\master\Desktop\C#OOP\LibraryManagementSystem\Borrowing.json";
+            borrow = ReadFromJson<Borrowing>(path);
             Console.WriteLine("Enter Reader ID:");
             int readerId = int.Parse(Console.ReadLine());
 
-            Console.WriteLine("Enter Book ID:");
+            Console.WriteLine("Enter Item ID:");
             int itemId = int.Parse(Console.ReadLine());
             Console.WriteLine("Enter type:");
             string type = Console.ReadLine();
@@ -206,40 +208,41 @@ namespace LibraryManagementSystem
             DateTime borrowDate = DateTime.Now;
             DateTime dueDate = borrowDate.AddDays(14);
 
-            Borrowing borrow1 = Borrowing.Create(readerId, itemId, type);
+            Borrowing borrow1 = Borrowing.BorrowingCreate(readerId, itemId, type);
             borrow.Add(borrow1);
-            Console.WriteLine("✅ Book borrowed successfully.");
-            SaveToJson<Books>(books, path);
+            Console.WriteLine("Borrowed successfully.");
+            SaveToJson<Borrowing>(borrow, path);
         }
-        public void ReturnBook()
+        public void Return()
         {
-            string BookPath = @"C:\Users\master\Desktop\C#OOP\LibraryManagementSystem\Books.json";
+            string magazinePath = @"C:\Users\master\Desktop\C#OOP\LibraryManagementSystem\magazine.json";
             string borrowPath = @"C:\Users\master\Desktop\C#OOP\LibraryManagementSystem\Borrowing.json";
 
-            List<Books> books = ReadFromJson<Books>(BookPath);
+            List<Magazine> magazines = ReadFromJson<Magazine>(magazinePath);
             List<Borrowing> borrowings = ReadFromJson<Borrowing>(borrowPath);
 
             Console.WriteLine("Enter Reader ID:");
             int readerId = int.Parse(Console.ReadLine());
 
-            Console.WriteLine("Enter Book ID:");
+            Console.WriteLine("Enter Magazine ID:");
             int itemId = int.Parse(Console.ReadLine());
 
             Console.WriteLine("Enter type:");
             string type = Console.ReadLine();
 
-            Borrowing returnedBorrow = Borrowing.Create(readerId, itemId, type);
+            Borrowing returnedBorrow = Borrowing.BorrowingCreate(readerId, itemId, type);
             returnedBorrow.IsReturned = true;
 
             borrowings.Add(returnedBorrow);
 
             SaveToJson<Borrowing>(borrowings, borrowPath);
-            Console.WriteLine("Book returned successfully.");
+            Console.WriteLine("Returned successfully.");
         }
+
         public void RentHall()
         {
-            string path = @"C:\Users\master\Desktop\C#OOP\LibraryManagementSystem\Halls.json";
-            List<Halls> hallsList = ReadFromJson<Halls>(path);
+            string path = @"C:\Users\master\Desktop\C#OOP\LibraryManagementSystem\Rent.json";
+            List<Rent> rent = ReadFromJson<Rent>(path);
 
             Console.WriteLine("Enter reader name:");
             string readerName = Console.ReadLine();
@@ -257,15 +260,11 @@ namespace LibraryManagementSystem
 
             Rent rentHall = Rent.RentCreate(readerName, readerAddress, phoneNumber, hallName,
                 capacity, location, isAvailable);
-            rentHall.IsAvailable = true;
+            rentHall.IsAvailable = false;
 
-            // Assuming you have a list to store rents
-            List<Rent> rentList = new List<Rent>();
-            rentList.Add(rentHall);
+            rent.Add(rentHall);
 
-            // Save to JSON
-            string rentPath = @"C:\Users\master\Desktop\C#OOP\LibraryManagementSystem\Rents.json";
-            SaveToJson<Rent>(rentList, rentPath);
+            SaveToJson<Rent>(rent, path);
 
             Console.WriteLine("Hall rented successfully.");
         }
@@ -286,7 +285,7 @@ namespace LibraryManagementSystem
         {
             string path = @"C:\Users\master\Desktop\C#OOP\LibraryManagementSystem\magazine.json";
             List<Magazine> magazines = ReadFromJson<Magazine>(path);
-
+            Magazine.UpdateNextIdM(magazine);
             Console.WriteLine("Enter Magazine name:");
             string title = Console.ReadLine();
 
@@ -405,51 +404,8 @@ namespace LibraryManagementSystem
                 Console.WriteLine("No magazine was found with this ID.");
             }
         }
-        public void BorrowMagazine()
-        {
-            string path = @"C:\Users\master\Desktop\C#OOP\LibraryManagementSystem\magazine.json";
-            List<Magazine> magazines = ReadFromJson<Magazine>(path);
-            Console.WriteLine("Enter Reader ID:");
-            int readerId = int.Parse(Console.ReadLine());
 
-            Console.WriteLine("Enter Magazine ID:");
-            int itemId = int.Parse(Console.ReadLine());
-            Console.WriteLine("Enter type:");
-            string type = Console.ReadLine();
 
-            DateTime borrowDate = DateTime.Now;
-            DateTime dueDate = borrowDate.AddDays(14);
-
-            Borrowing borrow1 = Borrowing.Create(readerId, itemId, type);
-            borrow.Add(borrow1);
-            Console.WriteLine("Magazine borrowed successfully.");
-            SaveToJson<Magazine>(magazine, path);
-        }
-        public void ReturnMagazine()
-        {
-            string magazinePath = @"C:\Users\master\Desktop\C#OOP\LibraryManagementSystem\magazine.json";
-            string borrowPath = @"C:\Users\master\Desktop\C#OOP\LibraryManagementSystem\Borrowing.json";
-
-            List<Magazine> magazines = ReadFromJson<Magazine>(magazinePath);
-            List<Borrowing> borrowings = ReadFromJson<Borrowing>(borrowPath);
-
-            Console.WriteLine("Enter Reader ID:");
-            int readerId = int.Parse(Console.ReadLine());
-
-            Console.WriteLine("Enter Magazine ID:");
-            int itemId = int.Parse(Console.ReadLine());
-
-            Console.WriteLine("Enter type:");
-            string type = Console.ReadLine();
-
-            Borrowing returnedBorrow = Borrowing.Create(readerId, itemId, type);
-            returnedBorrow.IsReturned = true;
-
-            borrowings.Add(returnedBorrow);
-
-            SaveToJson<Borrowing>(borrowings, borrowPath);
-            Console.WriteLine("Magazine returned successfully.");
-        }
         /// <summary>
         /// Readers
         /// </summary>
@@ -467,7 +423,7 @@ namespace LibraryManagementSystem
         {
             string path = @"C:\Users\master\Desktop\C#OOP\LibraryManagementSystem\Reader.json";
             List<Reader> readers = ReadFromJson<Reader>(path);
-
+            Reader.UpdateNextIdR(readers);
             Console.WriteLine("Enter Reader name:");
             string readerName = Console.ReadLine();
 
@@ -475,7 +431,7 @@ namespace LibraryManagementSystem
             string readerAddress = Console.ReadLine();
 
             Console.WriteLine("Enter Phone number:");
-            int phoneNumber = int.Parse(Console.ReadLine());
+            string phoneNumber = Console.ReadLine();
 
             Reader newReader = Reader.ReaderCreate(readerName, readerAddress, phoneNumber);
             readers.Add(newReader);
@@ -544,8 +500,12 @@ namespace LibraryManagementSystem
                 string readerAddress = Console.ReadLine();
 
                 Console.WriteLine("Enter new Phone number:");
-                int phoneNumber = int.Parse(Console.ReadLine());
-
+                string phoneNumber = Console.ReadLine();
+                if (!Regex.IsMatch(phoneNumber, @"^07\d{9}$"))
+                {
+                    Console.WriteLine("Invalid phone number format.");
+                    return;
+                }
                 Reader updatedReader = Reader.ReaderCreate(readerName, readerAddress, phoneNumber);
                 updatedReader.ReaderId = id;
 
@@ -576,7 +536,7 @@ namespace LibraryManagementSystem
         {
             string path = @"C:\Users\master\Desktop\C#OOP\LibraryManagementSystem\Halls.json";
             List<Halls> hallsList = ReadFromJson<Halls>(path);
-
+            Halls.UpdateNextIdH(halls);
             Console.WriteLine("Enter Hall name:");
             string title = Console.ReadLine();
 

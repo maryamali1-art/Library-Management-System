@@ -25,10 +25,9 @@ namespace LibraryManagementSystem
             IsAvailable = isAvailable;
         }
 
-        private static int GenerateUniqueId()
+        public static void UpdateNextIdH(List<Halls> hall)
         {
-            // Example: generate a random ID (you can improve this logic)
-            return new Random().Next(1000, 9999);
+            nextId = (hall != null && hall.Count > 0) ? hall.Max(b => b.HallId) + 1 : 1;
         }
 
 

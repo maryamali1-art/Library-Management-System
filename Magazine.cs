@@ -30,6 +30,11 @@ namespace LibraryManagementSystem
             PageCount = pageCount;
             Price = price;
         }
+
+        public static void UpdateNextIdM(List<Magazine> magazine)
+        {
+            nextId = (magazine != null && magazine.Count > 0) ? magazine.Max(b => b.MagazineId) + 1 : 1;
+        }
         public static Magazine MagazineCreate(string Title, string Publisher, string Category,
             int IssueNumber, DateTime ReleaseDate, int PageCount, int Price)
         {
@@ -52,4 +57,3 @@ namespace LibraryManagementSystem
 
     }
 }
-

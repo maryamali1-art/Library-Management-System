@@ -17,13 +17,13 @@ namespace LibraryManagementSystem
         public DateTime DueDate { get; set; }
         public DateTime? ReturnDate { get; set; }
 
-        // Factory method
-        public static Borrowing Create(int readerId, int itemId, string type)
+       
+        public static Borrowing BorrowingCreate(int readerId, int itemId, string type)
         {
             return new Borrowing(readerId, itemId, type, DateTime.Now, DateTime.Now.AddDays(14));
         }
 
-        // Constructor
+       
         public Borrowing(int readerId, int itemId, string type, DateTime borrowDate, DateTime dueDate)
         {
             ReaderId = readerId;
@@ -34,16 +34,14 @@ namespace LibraryManagementSystem
             IsReturned = false;
         }
 
-        public void MarkAsReturned(DateTime returnDate)
-        {
-            IsReturned = true;
-            ReturnDate = returnDate;
-        }
+        //public void MarkAsReturned(DateTime returnDate)
+        //{
+        //    IsReturned = true;
+        //    ReturnDate = returnDate;
+        //}
 
-        public bool IsOverdue()
-        {
-            return !IsReturned && DateTime.Now > DueDate;
-        }
+
     }
 }
+
 

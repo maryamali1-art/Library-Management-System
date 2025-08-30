@@ -3,18 +3,18 @@
     "ReaderId": 1,
     "ReaderName": "Ali Hassan",
     "ReaderAddreas": "Baghdad, Al-Mansour",
-    "PhoneNumber": 7901234567
+    "PhoneNumber": "7901234567"
   },
   {
     "ReaderId": 2,
     "ReaderName": "Sara Ahmed",
     "ReaderAddreas": "Basra, Al-Jubaila",
-    "PhoneNumber": 7809876543
+    "PhoneNumber": "7809876543"
   },
   {
     "ReaderId": 3,
     "ReaderName": "Omar Khalid",
     "ReaderAddreas": "Erbil, Ankawa",
-    "PhoneNumber": 7704567890
+    "PhoneNumber": "7704567890"
   }
 ]
